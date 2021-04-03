@@ -1,0 +1,6 @@
+backend/node_modules
+backend/public
+.idea
+
+react-app/node_modules
+react-app/public
