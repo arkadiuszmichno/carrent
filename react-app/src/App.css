@@ -1,16 +1,16 @@
+body {
+  background-image: url("bg.png");
+  background-repeat: repeat;
+}
+
 .App {
   text-align: center;
 }
 
 .App-logo {
+  animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
   pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
 }
 
 .App-header {
@@ -36,3 +36,311 @@
     transform: rotate(360deg);
   }
 }
+
+#container {
+  width: 1080px;
+  margin: 0px auto;
+  background-color: #eceeff;
+}
+
+#logo {
+  height: 60px;
+  background-image: url("bg-header.png");
+  background-repeat: repeat;
+}
+
+#logo h1 {
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 25px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  line-height: 19.8px;
+  padding: 20px;
+  color: #F2F2F2;
+}
+
+#nav-bar {
+  height: 60px;
+  background-image: url("bg-header.png");
+  background-repeat: repeat;
+
+}
+
+#nav-bar ul {
+  margin: 0 20px;
+  padding: 0;
+  text-decoration: none;
+}
+
+#nav-bar li {
+  height: 60px;
+  display: block;
+  float: left;
+}
+#nav-bar li a{
+  display: block;
+  font-weight:bold;
+  text-decoration: none;
+  padding: 20px;
+  height: 20px;
+  color: #f2f2f2;
+}
+
+#nav-bar li a:hover {
+  background-color: #F2F2F2;
+  font-weight:bold;
+  color: #006699;
+}
+#left-side {
+  width: 260px;
+  height: 600px;
+  float: left;
+}
+
+#search-box {
+  margin-top: 20px;
+  height: 400px;
+  background-color: #48484a;
+}
+
+.no-decoration{
+  text-decoration: none !important;
+}
+
+#right-side {
+  width: 820px;
+  float: right;
+}
+
+#right-side-inner {
+  min-height: 600px; /* IF only height - problem */
+  margin: 20px;
+}
+
+.apartment {
+  min-height: 220px;
+  background-color: #C9C6C4;
+  margin-bottom: 20px;
+}
+
+.apartment .img {
+  width: 180px;
+  height: 180px;
+  float: left;
+  margin: 20px;
+}
+
+.error {
+  color: red;
+}
+
+.apartment .img-inner {
+  max-width: 180px;
+  max-height: 180px;
+  background-color: #A6A4A2;
+  margin: 0 auto;
+}
+
+.picture-apartment {
+  max-width: 140px;
+  max-height: 140px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.apartment .description-content {
+  width: 540px;
+  min-height: 180px;
+  background-color: #C9C6C4;
+  margin-left: 200px;
+  margin-top: 20px;
+  margin-right: 20px;
+  padding: 20px 0;
+}
+
+.apartment .description-content h3 {
+  margin: 0;
+  padding: 0;
+}
+
+.apartment .description-content p {
+  margin-top: 3px;
+  margin-bottom: 3px;
+  padding: 0;
+}
+
+.apartment .city {
+  font-size: 14px;
+}
+
+.apartment .price p {
+  text-align: right;
+  padding-right: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #303141;
+}
+
+.apartment .description {
+  min-height: 70px;
+  margin-left: -180px;
+}
+
+.apartment p.additional-info {
+  font-size: 16px;
+  margin-left: -180px;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.apartment .additional-description {
+  margin-top: 20px;
+  margin-left: -180px;
+
+}
+
+.apartment .button {
+  text-align: center;
+  margin-left: 2px;
+}
+
+.apartment .place-button {
+  height: 41px;
+  margin-bottom: 20px;
+}
+
+.addapartment label{
+  display: block;
+}
+
+.addapartment input{
+  height: 25px;
+  width: 260px;
+}
+
+.addapartment textarea {
+  height: 200px;
+  width: 600px;
+}
+
+.button{
+  float: right;
+  width: 150px;
+  display: block;
+  text-decoration: none;
+  padding: 10px;
+  color: #FFFFCA;
+  background-color: #303141;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.button a{
+  text-decoration: none;
+  color: #FFFFCA;
+}
+
+#footer {
+  height: 40px;
+  background-color: black;
+  margin-top: 40px;
+}
+
+.clear {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  clear: both;
+}
+
+.popup {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: rgba(0,0,0, 0.5);
+}
+.popup_inner {
+  position: absolute;
+  left: 40%;
+  right: 40%;
+  top: 45%;
+  bottom: 45%;
+  margin: auto;
+  border-radius: 20px;
+  background: white;
+  font-size: 10px;
+  padding: 10px;
+}
+
+#search-box .row-search {
+  margin-top: 7px;
+  color: #F2F2F2;
+}
+
+#search-box-inner {
+  margin: 7px 12px;
+  padding-top: 15px;
+}
+
+
+#search-box .row-search input.input-search {
+  width: 213px;
+  height: 38px;
+  border-radius: 4px;
+  border: #ccc 1px solid;
+  padding: 0 .857em;
+}
+
+#details {
+  text-align: center;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  border: 3px solid #ddd;
+  width: 100%;
+}
+
+#details td, #details th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#details tr:nth-child(even){background-color: #f2f2f2;}
+
+#details tr:hover {background-color: #ddd;}
+
+#details th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #303141;
+  color: white;
+}
+
+.button-details {
+  background-color: #303141;
+  border: none;
+  color: white;
+  padding: 10px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+  margin: 2px 2px;
+  cursor: pointer;
+}
+
+.button-green {background-color: #00482B ;}
+.button-red {background-color: #BA0020;}
+.button-orange {background-color: #c5600e;}
+
+.bookings-confirmed {color: #008000;}
+.bookings-unconfirmed {color: #c5600e;}
+.bookings-canceled {color:  #BA0020;}
