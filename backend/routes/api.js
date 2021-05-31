@@ -6,6 +6,8 @@ var express = require('express');
 var jwt = require('jsonwebtoken');
 var router = express.Router();
 var User = require("../model/user");
+const cors = require('cors');
+
 
 router.post('/signup', function (req, res) {
     if (!req.body.username || !req.body.password) {
@@ -16,7 +18,8 @@ router.post('/signup', function (req, res) {
             username: req.body.username,
             password: req.body.password,
             email: req.body.email,
-            name: req.body.name
+            name: req.body.name,
+            admin: false
         });
 
         newUser.save(function (err) {
@@ -38,7 +41,7 @@ router.post('/signup', function (req, res) {
     }
 });
 
-router.post('/signin', function (req, res) {
+router.post('/signin', cors(), function (req, res) {
     User.findOne({
         username: req.body.username
     }, function (err, user) {

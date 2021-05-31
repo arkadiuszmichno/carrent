@@ -8,7 +8,8 @@ const CarSchema = mongoose.Schema({
     seats: Number,
     segment: String,
     gearbox: String,
-    price: Number
+    price: Number,
+    img: Object
 });
 
 module.exports = mongoose.model('Car', CarSchema);

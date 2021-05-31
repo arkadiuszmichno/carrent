@@ -22,15 +22,15 @@ router.get('/', passport.authenticate('jwt', {session: false}), function (req, r
             query.segment = req.query.segment;
         }
         Car.find(query, function (err, cars) {
-            if (err) return next(err);
+            if (err) return err;
             Reservation.find({dateTo: {$gte: req.query.dateFrom}, dateFrom: {$lte: req.query.dateTo}}, function (err, reservations) {
               //  console.log(reservations);
                 let usedCars = [];
                 for(let i = 0; i < cars.length; i++) {
                     console.log("Car: " + cars[i]._id);
                     for(let j = 0; j < reservations.length; j++) {
-                        console.log("reservation: " + reservations[j].carId);
-                        if (reservations[j].carId.toString() === cars[i]._id.toString()) {
+                        // console.log("reservation: " + reservations[j].carId);
+                        if (reservations[j].car._id.toString() === cars[i]._id.toString()) {
                             console.log("wtf");
                             usedCars.push(cars[i]._id);
                         }

@@ -21,6 +21,10 @@ var UserSchema = new Schema({
         unique: true,
         required: true
     },
+    admin: {
+        type: Boolean,
+        required: true
+    }
 });
 
 UserSchema.pre('save', function (next) {

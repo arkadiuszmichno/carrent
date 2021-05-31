@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import {NavLink} from "react-router-dom";
 import Header from './Header';
 import Footer from './Footer';
-import LeftSide from './LeftSide';
+import LeftSearch from './LeftSearch';
 import ModalImage from "react-modal-image";
 
 
@@ -11,24 +10,40 @@ class MainPage extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            apartments: [],
-            dateFrom: this.props.match.params.idApartment,
-            dateTo: this.props.match.params.idApartment,
-            numberPeople: this.props.match.params.idApartment,
+            cars: [],
+            dateFrom: this.props.match.params.dateFrom,
+            dateTo: this.props.match.params.dateTo,
+            seats: this.props.match.params.seats,
         };
 
     }
 
     componentDidMount() {
-        if(this.state.dateFrom != null) {
-            this.getApartmentsByCriteria();
+        if (this.state.dateFrom != null || this.state.dateTo != null || this.state.seats != null) {
+            this.getCarsByCriteria();
         } else {
-            this.getAllApartments();
+            this.getAllCars();
         }
     }
 
-    getApartmentsByCriteria() {
-        var url = "http://localhost:8080/apartments/show/all/"+this.state.dateFrom+"/"+this.state.dateTo+"/"+this.state.numberPeople;
+    getCarsByCriteria() {
+        let url = "https://localhost:8080/api/cars?";
+
+        if(this.state.dateFrom) {
+            url += 'dateFrom=' + this.state.dateFrom + '&&';
+        }
+        if(this.state.dateTo) {
+            url += 'dateTo=' + this.state.dateTo + '&&';
+        }
+        if(this.state.gearbox) {
+            url += 'gearbox=' + this.state.gearbox + '&&';
+        }
+        if(this.state.seats) {
+            url += 'seats=' + this.state.seats + '&&';
+        }
+        if(this.state.segment) {
+            url += 'segment=' + this.state.segment + '&&';
+        }
 
         fetch(url, {
             mode: 'cors',
@@ -36,19 +51,19 @@ class MainPage extends Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': 'http://localhost:3000',
+                "authorization": JSON.parse(localStorage.getItem('token'))
             },
             method: 'GET',
         })
             .then(results => {
-                console.log(results);
                 return results.json();
             }).then(results => {
-            this.setState({apartments: results.result})
+            this.setState({cars: results})
         })
     }
 
-    getAllApartments() {
-        var url = "http://localhost:8080/apartments/show/all/0/10";
+    getAllCars() {
+        let url = "http://localhost:8080/api/cars";
 
         fetch(url, {
             mode: 'cors',
@@ -56,40 +71,39 @@ class MainPage extends Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': 'http://localhost:3000',
+                "authorization": JSON.parse(localStorage.getItem('token'))
             },
             method: 'GET',
         })
             .then(results => {
-                console.log(results);
                 return results.json();
             }).then(results => {
-            this.setState({apartments: results.result})
+            this.setState({cars: results})
         })
     }
 
     render() {
-        let apartments = this.state.apartments.map((apartment) => {
+        let cars = this.state.cars.map((car) => {
             return (
-                <div className="apartment" key={apartment.idApartment}>
+                <div className="apartment" key={car._id}>
                     <div className="img">
                         <ModalImage
                             className="picture-apartment"
-                            small={"http://localhost:8080/uploads/"+apartment.filePath}
-                            large={"http://localhost:8080/uploads/"+apartment.filePath}
+                            small={"data:image/jpeg;base64," + car.img.data}
+                            large={"data:image/jpeg;base64," + car.img.data}
                             hideDownload="true"
-                            alt={apartment.nameApartment+" ("+apartment.city+")"}
+                            alt={car.mark + " (" + car.model + ")"}
                         />
                     </div>
                     <div className="description-content">
-                        <h3>{apartment.nameApartment}</h3>
-                        <p className="city">{apartment.city}</p>
-                        <div className="description">{apartment.description}</div>
+                        <h3>{car.mark} {car.model}</h3>
+                        <p className="seats">Liczba miejsc: {car.seats}</p>
+                        <p className="productionYear">Rok: {car.productionYear}</p>
+                        <div className="power">Moc: {car.power} KM</div>
+                        <div className="gearbox">Skrzynia: {car.gearbox}</div>
+                        <div className="segment">Segment: {car.segment}</div>
                         <div className="price">
-                            <p>Cena: {apartment.priceDay} zł (za 1 dzień)</p>
-                        </div>
-                        <div className="place-button">
-                            <div className="button"><NavLink to={`apartment/details/${apartment.idApartment}`}>Zobacz
-                                szczegóły</NavLink></div>
+                            <p>Cena: {car.price} zł (za 1 dzień)</p>
                         </div>
                     </div>
                 </div>
@@ -98,20 +112,20 @@ class MainPage extends Component {
         return (
             <React.Fragment>
                 <div id="container">
-                    <Header />
+                    <Header/>
                     <div id="content">
-                        <LeftSide />
+                        <LeftSearch/>
                         <div id="right-side">
                             <div id="right-side-inner">
                                 <h1>
-                                    Wybierz apartament:
+                                    Wprowadz kryteria:
                                 </h1>
-                                {apartments}
+                                {cars}
                             </div>
                         </div>
                         <div className="clear"></div>
                     </div>
-                    <Footer />
+                    <Footer/>
                 </div>
             </React.Fragment>
         );

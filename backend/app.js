@@ -8,11 +8,17 @@ const bodyParser = require('body-parser');
 const api = require('./routes/api');
 const carsRoutes = require('./routes/cars');
 const reservationRoutes = require('./routes/reservations');
+const uploadRoutes = require('./routes/uploads');
 
 const app = express();
 
-mongoose.connect(config.database, { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true }, () =>{
+const server = app.listen(8080, () => {
+    console.log('Server is started on 127.0.0.1:'+ 8080)
+})
+
+mongoose.connect(config.database, { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true }, (respo) =>{
     console.log("connected");
+    console.log(respo);
 });
 
 app.use(cors());
@@ -30,5 +36,6 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 app.use('/api', jsonParser, api);
 app.use('/api/cars', carsRoutes);
 app.use('/api/reservations', reservationRoutes);
+app.use('/api/uploads', uploadRoutes);
 
 module.exports = app;

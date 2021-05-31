@@ -5,9 +5,23 @@ const ReservationSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    carId: {
-        type: String,
-        required: true
+    car: {
+        _id: {
+            type: String,
+            required: true
+        },
+        mark: {
+            type: String,
+            required: true
+        },
+        model: {
+            type: String,
+            required: true
+        },
+        img: {
+            type: Object,
+            required: true
+        }
     },
     dateFrom: {
         type: Date,
